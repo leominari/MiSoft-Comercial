@@ -5,6 +5,9 @@
  */
 package view;
 
+import classes.Endereco;
+import javax.swing.JOptionPane;
+import controller.CadastroClienteController;
 /**
  *
  * @author leo_m
@@ -71,16 +74,16 @@ public class CadastroCliente extends javax.swing.JFrame {
         lbEstado = new javax.swing.JLabel();
         tfEstado = new javax.swing.JTextField();
         btnPCep = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        pInformacoes = new javax.swing.JPanel();
         lbTelefone = new javax.swing.JLabel();
         tfTelefone = new javax.swing.JTextField();
         lbEmail = new javax.swing.JLabel();
         tfEmail = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        lbObservacoes = new javax.swing.JLabel();
+        spObservacoes = new javax.swing.JScrollPane();
+        taObservacoes = new javax.swing.JTextArea();
+        pComercial = new javax.swing.JPanel();
+        pEstoque = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,11 +135,6 @@ public class CadastroCliente extends javax.swing.JFrame {
         cboxIsento.setText("Isento");
 
         btnPCnpj.setText("P");
-        btnPCnpj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPCnpjActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pInfosLayout = new javax.swing.GroupLayout(pInfos);
         pInfos.setLayout(pInfosLayout);
@@ -233,12 +231,6 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         lbRua.setText("Rua");
 
-        tfRua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfRuaActionPerformed(evt);
-            }
-        });
-
         lbNumero.setText("Número");
 
         lbBairro.setText("Bairro");
@@ -247,19 +239,7 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         lbCidade.setText("Cidade");
 
-        tfCidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfCidadeActionPerformed(evt);
-            }
-        });
-
         lbPais.setText("País");
-
-        tfPais.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfPaisActionPerformed(evt);
-            }
-        });
 
         lbEstado.setText("Estado");
 
@@ -351,32 +331,26 @@ public class CadastroCliente extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        pInformacoes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         lbTelefone.setText("Telefone");
 
         lbEmail.setText("Email");
 
-        tfEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfEmailActionPerformed(evt);
-            }
-        });
+        lbObservacoes.setText("Observações");
 
-        jLabel1.setText("Observações");
+        taObservacoes.setColumns(20);
+        taObservacoes.setRows(5);
+        spObservacoes.setViewportView(taObservacoes);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pInformacoesLayout = new javax.swing.GroupLayout(pInformacoes);
+        pInformacoes.setLayout(pInformacoesLayout);
+        pInformacoesLayout.setHorizontalGroup(
+            pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pInformacoesLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pInformacoesLayout.createSequentialGroup()
                         .addComponent(lbTelefone)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -384,23 +358,23 @@ public class CadastroCliente extends javax.swing.JFrame {
                         .addComponent(lbEmail)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbObservacoes)
+                    .addComponent(spObservacoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pInformacoesLayout.setVerticalGroup(
+            pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pInformacoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbTelefone)
                     .addComponent(tfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbEmail)
                     .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
+                .addComponent(lbObservacoes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(spObservacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -410,7 +384,7 @@ public class CadastroCliente extends javax.swing.JFrame {
             pGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pInfos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pInformacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pGeralLayout.setVerticalGroup(
             pGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -419,37 +393,37 @@ public class CadastroCliente extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(pEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         tpCabecalho.addTab("Geral", pGeral);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pComercialLayout = new javax.swing.GroupLayout(pComercial);
+        pComercial.setLayout(pComercialLayout);
+        pComercialLayout.setHorizontalGroup(
+            pComercialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 591, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pComercialLayout.setVerticalGroup(
+            pComercialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 538, Short.MAX_VALUE)
         );
 
-        tpCabecalho.addTab("Comercial", jPanel2);
+        tpCabecalho.addTab("Comercial", pComercial);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pEstoqueLayout = new javax.swing.GroupLayout(pEstoque);
+        pEstoque.setLayout(pEstoqueLayout);
+        pEstoqueLayout.setHorizontalGroup(
+            pEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 591, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pEstoqueLayout.setVerticalGroup(
+            pEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 538, Short.MAX_VALUE)
         );
 
-        tpCabecalho.addTab("Estoque", jPanel3);
+        tpCabecalho.addTab("Estoque", pEstoque);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -470,28 +444,14 @@ public class CadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPCepActionPerformed
-        // TODO add your handling code here:
+        clienteEnd = completaCep();
+        if (tfCep.getText() == null || tfCep.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Insira um CEP");
+        }
+        
+        endUsado = true;
+
     }//GEN-LAST:event_btnPCepActionPerformed
-
-    private void tfPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPaisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfPaisActionPerformed
-
-    private void tfCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfCidadeActionPerformed
-
-    private void tfRuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfRuaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfRuaActionPerformed
-
-    private void tfEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfEmailActionPerformed
-
-    private void btnPCnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPCnpjActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPCnpjActionPerformed
 
     /**
      * @param args the command line arguments
@@ -526,20 +486,17 @@ public class CadastroCliente extends javax.swing.JFrame {
                 new CadastroCliente().setVisible(true);
             }
         });
+
     }
 
+    private Endereco clienteEnd;
+    private boolean endUsado;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnPCep;
     private javax.swing.JButton btnPCnpj;
     private javax.swing.JCheckBox cboxIsento;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbBairro;
     private javax.swing.JLabel lbCapitalSocial;
     private javax.swing.JLabel lbCep;
@@ -555,14 +512,20 @@ public class CadastroCliente extends javax.swing.JFrame {
     private javax.swing.JLabel lbInscricaoMunicipal;
     private javax.swing.JLabel lbNomeFantasia;
     private javax.swing.JLabel lbNumero;
+    private javax.swing.JLabel lbObservacoes;
     private javax.swing.JLabel lbPais;
     private javax.swing.JLabel lbRazaoSocial;
     private javax.swing.JLabel lbRua;
     private javax.swing.JLabel lbTelefone;
+    private javax.swing.JPanel pComercial;
     private javax.swing.JPanel pEndereco;
+    private javax.swing.JPanel pEstoque;
     private javax.swing.JPanel pGeral;
+    private javax.swing.JPanel pInformacoes;
     private javax.swing.JPanel pInfos;
     private javax.swing.JPanel pRodape;
+    private javax.swing.JScrollPane spObservacoes;
+    private javax.swing.JTextArea taObservacoes;
     private javax.swing.JTextField tfBairro;
     private javax.swing.JTextField tfCapitalSocial;
     private javax.swing.JTextField tfCep;
