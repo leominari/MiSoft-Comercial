@@ -8,7 +8,7 @@ package controller;
 import classes.Endereco;
 
 
-public class CadastroClienteController {
+public class CCadastroCliente {
 
     public Endereco completaCep(String cep) {
         Endereco cliente = new Endereco();

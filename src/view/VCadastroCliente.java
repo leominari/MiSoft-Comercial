@@ -7,18 +7,18 @@ package view;
 
 import classes.Endereco;
 import javax.swing.JOptionPane;
-import controller.CadastroClienteController;
+import controller.CCadastroCliente;
 
 /**
  *
  * @author leo_m
  */
-public class CadastroCliente extends javax.swing.JFrame {
+public class VCadastroCliente extends javax.swing.JFrame {
 
     /**
      * Creates new form CadastroCliente
      */
-    public CadastroCliente() {
+    public VCadastroCliente() {
         initComponents();
     }
 
@@ -69,12 +69,12 @@ public class CadastroCliente extends javax.swing.JFrame {
         lbComplemento = new javax.swing.JLabel();
         tfComplemento = new javax.swing.JTextField();
         lbCidade = new javax.swing.JLabel();
-        tfCidade = new javax.swing.JTextField();
         lbPais = new javax.swing.JLabel();
         tfPais = new javax.swing.JTextField();
         lbEstado = new javax.swing.JLabel();
-        tfEstado = new javax.swing.JTextField();
         btnPCep = new javax.swing.JButton();
+        cbCidade = new javax.swing.JComboBox<Object>();
+        cbEstado = new javax.swing.JComboBox<Object>();
         pInformacoes = new javax.swing.JPanel();
         lbTelefone = new javax.swing.JLabel();
         tfTelefone = new javax.swing.JTextField();
@@ -251,6 +251,12 @@ public class CadastroCliente extends javax.swing.JFrame {
             }
         });
 
+        cbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEstadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pEnderecoLayout = new javax.swing.GroupLayout(pEndereco);
         pEndereco.setLayout(pEnderecoLayout);
         pEnderecoLayout.setHorizontalGroup(
@@ -267,7 +273,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                         .addGap(106, 106, 106)
                         .addComponent(lbEstado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfEstado))
+                        .addComponent(cbEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pEnderecoLayout.createSequentialGroup()
                         .addGroup(pEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -287,7 +293,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                             .addGroup(pEnderecoLayout.createSequentialGroup()
                                 .addComponent(lbCidade)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfCidade))
+                                .addComponent(cbCidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(pEnderecoLayout.createSequentialGroup()
                                 .addComponent(lbBairro)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -307,13 +313,13 @@ public class CadastroCliente extends javax.swing.JFrame {
                     .addComponent(tfCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPCep)
                     .addComponent(lbEstado)
-                    .addComponent(tfEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(pEnderecoLayout.createSequentialGroup()
                         .addGroup(pEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbCidade)
-                            .addComponent(tfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -436,7 +442,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(tpCabecalho, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+                .addComponent(tpCabecalho)
                 .addGap(0, 0, 0)
                 .addComponent(pRodape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -449,15 +455,19 @@ public class CadastroCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Insira um CEP");
             return;
         }
-        CadastroClienteController controller = new CadastroClienteController();
+        CCadastroCliente controller = new CCadastroCliente();
 
         clienteEnd = controller.completaCep(tfCep.getText());
         endUsado = true;
         tfBairro.setText(clienteEnd.getBairro());
-        tfCidade.setText(clienteEnd.getCidade());
+//        tfCidade.setText(clienteEnd.getCidade());
         tfRua.setText(clienteEnd.getLogradouro());
-        tfEstado.setText(clienteEnd.getUf());       
+//        tfEstado.setText(clienteEnd.getUf());       
     }//GEN-LAST:event_btnPCepActionPerformed
+
+    private void cbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbEstadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -476,19 +486,20 @@ public class CadastroCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VCadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VCadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VCadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VCadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new CadastroCliente().setVisible(true);
+            new VCadastroCliente().setVisible(true);
         });
 
     }
@@ -500,6 +511,8 @@ public class CadastroCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnPCep;
     private javax.swing.JButton btnPCnpj;
+    private javax.swing.JComboBox<Object> cbCidade;
+    private javax.swing.JComboBox<Object> cbEstado;
     private javax.swing.JCheckBox cboxIsento;
     private javax.swing.JLabel lbBairro;
     private javax.swing.JLabel lbCapitalSocial;
@@ -533,13 +546,11 @@ public class CadastroCliente extends javax.swing.JFrame {
     private javax.swing.JTextField tfBairro;
     private javax.swing.JTextField tfCapitalSocial;
     private javax.swing.JTextField tfCep;
-    private javax.swing.JTextField tfCidade;
     private javax.swing.JTextField tfCnpj;
     private javax.swing.JTextField tfComplemento;
     private javax.swing.JTextField tfConsumidorFinal;
     private javax.swing.JTextField tfContribuinte;
     private javax.swing.JTextField tfEmail;
-    private javax.swing.JTextField tfEstado;
     private javax.swing.JTextField tfFundacao;
     private javax.swing.JTextField tfInscricaoEstadual;
     private javax.swing.JTextField tfInscricaoMunicipal;
