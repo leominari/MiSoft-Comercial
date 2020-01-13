@@ -8,7 +8,7 @@ package view;
 import controller.Endereco;
 import controller.Estado;
 import javax.swing.JOptionPane;
-import controller.CCadastroCliente;
+import controller.CadastroCliente;
 import controller.Cidade;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -519,7 +519,7 @@ public class VCadastroCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Insira um CEP");
             return;
         }
-        CCadastroCliente controller = new CCadastroCliente();
+        CadastroCliente controller = new CadastroCliente();
         
         clienteEnd = controller.completaCep(ftfCep.getText());
         endUsado = true;

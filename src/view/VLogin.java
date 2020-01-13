@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.Login;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +21,7 @@ public class VLogin extends javax.swing.JFrame {
      */
     public VLogin() {
         initComponents();
+        user = new Login();
     }
 
     /**
@@ -37,8 +39,8 @@ public class VLogin extends javax.swing.JFrame {
         lbUsuario = new javax.swing.JLabel();
         tfUsuario = new javax.swing.JTextField();
         lbSenha = new javax.swing.JLabel();
-        tfSenha = new javax.swing.JTextField();
         btnEntrar = new javax.swing.JButton();
+        pfSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,20 +80,20 @@ public class VLogin extends javax.swing.JFrame {
         pLoginLayout.setHorizontalGroup(
             pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pLoginLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfUsuario)
-                    .addGroup(pLoginLayout.createSequentialGroup()
-                        .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbSenha)
-                            .addComponent(lbUsuario))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(tfSenha))
-                .addGap(40, 40, 40))
-            .addGroup(pLoginLayout.createSequentialGroup()
                 .addGap(89, 89, 89)
                 .addComponent(btnEntrar)
                 .addContainerGap(94, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pLoginLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pfSenha)
+                    .addComponent(tfUsuario, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pLoginLayout.createSequentialGroup()
+                        .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbSenha)
+                            .addComponent(lbUsuario))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(40, 40, 40))
         );
         pLoginLayout.setVerticalGroup(
             pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,8 +104,8 @@ public class VLogin extends javax.swing.JFrame {
                 .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbSenha)
-                .addGap(6, 6, 6)
-                .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEntrar)
                 .addGap(18, 18, 18))
@@ -134,14 +136,12 @@ public class VLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-
-        try {
-            VCadastroCliente cc = new VCadastroCliente();
-            cc.setVisible(rootPaneCheckingEnabled);
-            this.dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(VLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        user.setUsuario(tfUsuario.getText());
+        user.setSenha(pfSenha.getPassword());
+        System.out.println(user.getSenha());
+        VCadastroCliente cc = new VCadastroCliente();
+        cc.setVisible(rootPaneCheckingEnabled);
+        this.dispose();
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
@@ -181,7 +181,7 @@ public class VLogin extends javax.swing.JFrame {
             }
         });
     }
-
+    private Login user;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
     private javax.swing.JLabel lbMisoft;
@@ -189,7 +189,7 @@ public class VLogin extends javax.swing.JFrame {
     private javax.swing.JLabel lbUsuario;
     private javax.swing.JPanel pLogin;
     private javax.swing.JPanel pTitulo;
-    private javax.swing.JTextField tfSenha;
+    private javax.swing.JPasswordField pfSenha;
     private javax.swing.JTextField tfUsuario;
     // End of variables declaration//GEN-END:variables
 }

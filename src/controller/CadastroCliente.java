@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package controller;
-public class CCadastroCliente {
+public class CadastroCliente {
 
     public Endereco completaCep(String cep) {
         Endereco cliente = new Endereco();
