@@ -23,14 +23,13 @@ public class MCadastroCliente {
 
     public boolean novoCadastro(TCadastroJuridica colaborador) throws SQLException {
         ConexaoMysql banco = new ConexaoMysql();
-        String query = " ";
-        query = "INSERT INTO `colaborador`(`nome`, `razaosocial`, `documento`, `inscricaoestadual`, `telefone`, `email`, `observacoes`, `inscricaomunicipal`, `contribuinte`, `consumidorfinal`, `endereco`) VALUES ('"
+        String query = "INSERT INTO `colaborador`(`nome`, `razaosocial`, `documento`, `inscricaoestadual`, `telefone`, `email`, `observacoes`, `contribuinte`, `consumidorfinal`, `endereco`) VALUES ('"
                 + colaborador.getNomeFantasia() + "','" + colaborador.getRazaoSocial() + "','" + colaborador.getCnpj()
                 + "','" + colaborador.getInscricaoEstadual() + "','" + colaborador.getTelefone() + "','"
-                + colaborador.getEmail() + "','" + colaborador.getObservacoes() + "','" + colaborador.getObservacoes()
-                + "','" + colaborador.getInscricaoMunicipal() + "','" + colaborador.getContribuinte() + "','"
-                + colaborador.getConsumidorFinal() + "','" + colaborador.getIdEndereco() + "');";
-
+                + colaborador.getEmail() + "','" + colaborador.getObservacoes() + "','" + colaborador.getContribuinte() + "','"
+                + colaborador.getConsumidorFinal() + "'," + colaborador.getIdEndereco() + ");";
+        System.out.println(query);
+        System.out.println("foi krl");
         return banco.upQuery(query);
 
     }

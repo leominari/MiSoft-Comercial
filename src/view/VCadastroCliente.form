@@ -30,7 +30,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="tpCabecalho" max="32767" attributes="0"/>
+              <Component id="tpCabecalho" pref="526" max="32767" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="pRodape" min="-2" max="-2" attributes="0"/>
           </Group>
@@ -113,7 +113,7 @@
                       <Component id="pEndereco" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="pInformacoes" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -133,70 +133,52 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="39" pref="39" max="-2" attributes="0"/>
+                          <Component id="lbNomeFantasia" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="tfNomeFantasia" min="-2" pref="417" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="lbRazaoSocial" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="tfRazaoSocial" min="-2" pref="419" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="lbCnpj" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="ftfCnpj" min="-2" pref="147" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                              <Component id="btnPCnpj" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="lbInscricaoEstadual" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="ftfInscricaoEstadual" min="-2" pref="105" max="-2" attributes="0"/>
-                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                      <Component id="cboxIsento" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="lbInscricaoMunicipal" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="tfInscricaoMunicipal" max="32767" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                          </Group>
+                                  <Component id="lbRazaoSocial" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="tfRazaoSocial" min="-2" pref="419" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="lbContribuinte" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                          <Component id="tfContribuinte" min="-2" pref="133" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="lbFundacao" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="ftfFund" min="-2" pref="103" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="lbCnpj" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="ftfCnpj" min="-2" pref="147" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                          <Component id="btnPCnpj" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="lbInscricaoEstadual" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="ftfInscricaoEstadual" min="-2" pref="105" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="cboxIsento" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
                                           <Component id="lbConsumidorFinal" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="cbConsumidorFinal" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                                          <Component id="lbCapitalSocial" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="tfCapitalSocial" max="32767" attributes="0"/>
+                                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="39" pref="39" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="lbContribuinte" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="tfContribuinte" min="-2" pref="139" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="lbNomeFantasia" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="tfNomeFantasia" min="-2" pref="417" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
@@ -229,19 +211,12 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lbContribuinte" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="tfContribuinte" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbInscricaoMunicipal" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tfInscricaoMunicipal" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                                  <Component id="lbConsumidorFinal" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbConsumidorFinal" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lbFundacao" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbConsumidorFinal" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbCapitalSocial" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tfCapitalSocial" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbConsumidorFinal" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="ftfFund" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace pref="17" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -271,13 +246,6 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ftfCnpjActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lbCapitalSocial">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Capital Social"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="tfCapitalSocial">
-                </Component>
                 <Component class="javax.swing.JLabel" name="lbInscricaoEstadual">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Inscri&#xe7;&#xe3;o Estadual"/>
@@ -299,21 +267,6 @@
                       </StringArray>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbConsumidorFinalActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="lbInscricaoMunicipal">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Inscri&#xe7;&#xe3;o Municipal"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="tfInscricaoMunicipal">
-                </Component>
-                <Component class="javax.swing.JLabel" name="lbFundacao">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Funda&#xe7;&#xe3;o"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lbContribuinte">
                   <Properties>
@@ -334,8 +287,6 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="P"/>
                   </Properties>
-                </Component>
-                <Component class="javax.swing.JFormattedTextField" name="ftfFund">
                 </Component>
               </SubComponents>
             </Container>
@@ -360,9 +311,7 @@
                                   <Component id="lbCep" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="ftfCep" min="-2" pref="105" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnPCep" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
                                   <Component id="lbEstado" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="cbEstado" max="32767" attributes="0"/>
@@ -415,7 +364,6 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lbCep" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnPCep" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lbEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cbEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="ftfCep" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -502,14 +450,6 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Estado"/>
                   </Properties>
-                </Component>
-                <Component class="javax.swing.JButton" name="btnPCep">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="P"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPCepActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cbCidade">
                   <Properties>
@@ -646,7 +586,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="538" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="498" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -668,7 +608,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="538" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="498" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>

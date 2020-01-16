@@ -37,7 +37,7 @@ public class CLogin {
         if (verificacaoUser(user.getId())) {
             if (getUser().getUsuario().equals(user.getUsuario())) {
                 if (getUser().getSenha().equals(user.getSenha())) {
-                    System.out.println("salve");
+
                     return true;
                 } else {
                     JOptionPane.showMessageDialog(null, "Senha incorreta.");

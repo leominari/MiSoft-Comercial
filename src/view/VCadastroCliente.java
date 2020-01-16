@@ -16,7 +16,6 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -30,92 +29,118 @@ import tipos.TUsuario;
  */
 public class VCadastroCliente extends javax.swing.JFrame {
 
-        private boolean mudaCampo(JLabel lb, JTextField tf, String text) {
-                boolean rLb;
-                if (tf.getText() == null || tf.getText().trim().equals("")) {
-                        lb.setText(text + "*");
-                        lb.setForeground(Color.red);
-                        rLb = false;
-                } else {
-                        lb.setText(text);
-                        lb.setForeground(Color.black);
-                        rLb = true;
-                }
-                return rLb;
+    private boolean mudaCampo(JLabel lb, JTextField tf, String text) {
+        boolean rLb;
+        if (tf.getText() == null || tf.getText().trim().equals("")) {
+            lb.setText(text + "*");
+            lb.setForeground(Color.red);
+            rLb = false;
+        } else {
+            lb.setText(text);
+            lb.setForeground(Color.black);
+            rLb = true;
+        }
+        return rLb;
+    }
+
+    private boolean mudaCampoCk(JLabel lb, JTextField tf, String text, JCheckBox ck) {
+        boolean rLb;
+        if (ck.isEnabled()) {
+            rLb = true;
+        } else {
+            if (tf.getText() == null || tf.getText().trim().equals("")) {
+                lb.setText(text + "*");
+                lb.setForeground(Color.red);
+                rLb = false;
+            } else {
+                lb.setText(text);
+                lb.setForeground(Color.black);
+                rLb = true;
+            }
+        }
+        return rLb;
+    }
+
+    public boolean verificaCampos() {
+        return mudaCampo(lbRazaoSocial, tfRazaoSocial, lbRazaoSocial.getText())
+                && mudaCampo(lbCnpj, ftfCnpj, lbCnpj.getText()) && mudaCampoCk(lbInscricaoEstadual,
+                        ftfInscricaoEstadual, lbInscricaoEstadual.getText(), cboxIsento);
+    }
+
+    /**
+     * Creates new form CadastroCliente
+     *
+     * @throws java.sql.SQLException
+     */
+    private void formataCampos() {
+
+        try {
+            MaskFormatter mCnpj;
+            mCnpj = new MaskFormatter("##.###.###/####-##");
+            MaskFormatter mInscricaoEstadual = new MaskFormatter("###.###.###.###");
+            MaskFormatter mCep = new MaskFormatter("##.###-###");
+            mCnpj.install(ftfCnpj);
+            mInscricaoEstadual.install(ftfInscricaoEstadual);
+            mCep.install(ftfCep);
+        } catch (ParseException ex) {
+            Logger.getLogger(VCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        private boolean mudaCampoCk(JLabel lb, JTextField tf, String text, JCheckBox ck) {
-                boolean rLb;
-                if (ck.isEnabled()) {
-                        return true;
-                }
-                if (tf.getText() == null || tf.getText().trim().equals("")) {
-                        lb.setText(text + "*");
-                        lb.setForeground(Color.red);
-                        rLb = false;
-                } else {
-                        lb.setText(text);
-                        lb.setForeground(Color.black);
-                        rLb = true;
-                }
-                return rLb;
+    }
+
+    private void debugDados() {
+        tfRazaoSocial.setText("Leonardo Soares Minari -  MEI");
+        tfNomeFantasia.setText("Moinho Expresso");
+        ftfCnpj.setText("22.472.602/0001-84");
+        ftfInscricaoEstadual.setText("177.344.052.113");
+        tfContribuinte.setText("ICMS");
+        ftfCep.setText("16.072-105");
+        tfRua.setText("Av Joao Arruda Brasil");
+        tfNumero.setText("100");
+        tfComplemento.setText("AP 64 M");
+        tfBairro.setText("Vila Industrial");
+        tfTelefone.setText("18 981899508");
+        tfEmail.setText("minari.leo@gmail.com");
+        taObservacoes.setText("012345678901234567890123456789");
+    }
+
+    private void preCarregamento() throws SQLException {
+
+        List<TEstado> est = new TEstado().getEstados();
+        for (TEstado i : est) {
+            cbEstado.addItem(i);
         }
+        tfPais.setText("Brasil");
 
-        public boolean verificaCampos() {
-                return mudaCampo(lbRazaoSocial, tfRazaoSocial, lbRazaoSocial.getText())
-                                && mudaCampo(lbCnpj, ftfCnpj, lbCnpj.getText()) && mudaCampoCk(lbInscricaoEstadual,
-                                                ftfInscricaoEstadual, lbInscricaoEstadual.getText(), cboxIsento);
+    }
+
+    public VCadastroCliente() {
+        initComponents();
+    }
+
+    public VCadastroCliente(TUsuario user) {
+        initComponents();
+        this.user = user;
+        try {
+            preCarregamento();
+        } catch (SQLException e) {
         }
+        clienteEnd = new TEndereco();
+        controller = new CCadastroCliente();
+        formataCampos();
+        debugDados();
+    }
 
-        /**
-         * Creates new form CadastroCliente
-         *
-         * @throws java.sql.SQLException
-         */
-        private void formataCampos() throws ParseException {
-
-                MaskFormatter mFundacao = new MaskFormatter("##/##/####");
-                MaskFormatter mCnpj = new MaskFormatter("##.###.###/####-##");
-                MaskFormatter mInscricaoEstadual = new MaskFormatter("###.###.###.###");
-                MaskFormatter mCep = new MaskFormatter("##.###-###");
-                mFundacao.install(ftfFund);
-                mCnpj.install(ftfCnpj);
-                mInscricaoEstadual.install(ftfInscricaoEstadual);
-                mCep.install(ftfCep);
-        }
-
-        private void preCarregamento() throws SQLException {
-                List<TEstado> est = new TEstado().getEstados();
-                for (TEstado i : est) {
-                        cbEstado.addItem(i);
-                }
-                tfPais.setText("Brasil");
-        }
-
-        public VCadastroCliente() {
-                initComponents();
-        }
-
-        public VCadastroCliente(TUsuario user) {
-                this.user = user;
-                clienteEnd = new TEndereco();
-                controller = new CCadastroCliente();
-                initComponents();
-                try {
-                        formataCampos();
-                } catch (ParseException ex) {
-                        Logger.getLogger(VCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
-
-        /**
-         * This method is called from within the constructor to initialize the form.
-         * WARNING: Do NOT modify this code. The content of this method is always
-         * regenerated by the Form Editor.
-         */
-        @SuppressWarnings("unchecked")
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated
-        // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
         // Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
@@ -131,20 +156,14 @@ public class VCadastroCliente extends javax.swing.JFrame {
                 tfNomeFantasia = new javax.swing.JTextField();
                 lbCnpj = new javax.swing.JLabel();
                 ftfCnpj = new javax.swing.JFormattedTextField();
-                lbCapitalSocial = new javax.swing.JLabel();
-                tfCapitalSocial = new javax.swing.JTextField();
                 lbInscricaoEstadual = new javax.swing.JLabel();
                 ftfInscricaoEstadual = new javax.swing.JFormattedTextField();
                 lbConsumidorFinal = new javax.swing.JLabel();
                 cbConsumidorFinal = new javax.swing.JComboBox();
-                lbInscricaoMunicipal = new javax.swing.JLabel();
-                tfInscricaoMunicipal = new javax.swing.JTextField();
-                lbFundacao = new javax.swing.JLabel();
                 lbContribuinte = new javax.swing.JLabel();
                 tfContribuinte = new javax.swing.JTextField();
                 cboxIsento = new javax.swing.JCheckBox();
                 btnPCnpj = new javax.swing.JButton();
-                ftfFund = new javax.swing.JFormattedTextField();
                 pEndereco = new javax.swing.JPanel();
                 lbCep = new javax.swing.JLabel();
                 lbRua = new javax.swing.JLabel();
@@ -159,7 +178,6 @@ public class VCadastroCliente extends javax.swing.JFrame {
                 lbPais = new javax.swing.JLabel();
                 tfPais = new javax.swing.JTextField();
                 lbEstado = new javax.swing.JLabel();
-                btnPCep = new javax.swing.JButton();
                 cbCidade = new javax.swing.JComboBox<Object>();
                 cbEstado = new javax.swing.JComboBox<Object>();
                 ftfCep = new javax.swing.JFormattedTextField();
@@ -225,17 +243,11 @@ public class VCadastroCliente extends javax.swing.JFrame {
                         }
                 });
 
-                lbCapitalSocial.setText("Capital Social");
-
                 lbInscricaoEstadual.setText("Inscrição Estadual");
 
                 lbConsumidorFinal.setText("Consumidor Final");
 
                 cbConsumidorFinal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Não", "Sim" }));
-
-                lbInscricaoMunicipal.setText("Inscrição Municipal");
-
-                lbFundacao.setText("Fundação");
 
                 lbContribuinte.setText("Tipo Contribuinte");
 
@@ -252,101 +264,65 @@ public class VCadastroCliente extends javax.swing.JFrame {
                 pInfos.setLayout(pInfosLayout);
                 pInfosLayout.setHorizontalGroup(pInfosLayout
                                 .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(pInfosLayout.createSequentialGroup().addGroup(pInfosLayout
-                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(pInfosLayout.createSequentialGroup().addGap(40, 40, 40)
+                                .addGroup(pInfosLayout.createSequentialGroup().addGap(39, 39, 39)
+                                                .addComponent(lbNomeFantasia)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(tfNomeFantasia, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                417, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(pInfosLayout.createSequentialGroup().addGap(40, 40, 40).addGroup(pInfosLayout
+                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pInfosLayout
+                                                                .createSequentialGroup().addComponent(lbRazaoSocial)
+                                                                .addGap(18, 18, 18).addComponent(tfRazaoSocial,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                419,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(pInfosLayout.createSequentialGroup().addGroup(pInfosLayout
+                                                                .createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                .addGroup(pInfosLayout.createSequentialGroup()
+                                                                                .addComponent(lbContribuinte)
+                                                                                .addGap(10, 10, 10)
+                                                                                .addComponent(tfContribuinte,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                133,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGroup(pInfosLayout.createSequentialGroup()
+                                                                                .addComponent(lbCnpj)
+                                                                                .addPreferredGap(
+                                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                                .addComponent(ftfCnpj,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                147,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addGap(4, 4, 4)
+                                                                                .addComponent(btnPCnpj)))
+                                                                .addGap(18, 18, 18)
                                                                 .addGroup(pInfosLayout.createParallelGroup(
                                                                                 javax.swing.GroupLayout.Alignment.LEADING)
                                                                                 .addGroup(pInfosLayout
-                                                                                                .createParallelGroup(
-                                                                                                                javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING,
-                                                                                                                pInfosLayout.createSequentialGroup()
-                                                                                                                                .addComponent(lbRazaoSocial)
-                                                                                                                                .addGap(18, 18, 18)
-                                                                                                                                .addComponent(tfRazaoSocial,
-                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                419,
-                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                                                .addGroup(pInfosLayout
-                                                                                                                .createSequentialGroup()
-                                                                                                                .addComponent(lbCnpj)
+                                                                                                .createSequentialGroup()
+                                                                                                .addComponent(lbInscricaoEstadual)
+                                                                                                .addPreferredGap(
+                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                                                .addComponent(ftfInscricaoEstadual,
+                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                105,
+                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                .addPreferredGap(
+                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                                                .addComponent(cboxIsento))
+                                                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                                                pInfosLayout.createSequentialGroup()
+                                                                                                                .addComponent(lbConsumidorFinal)
                                                                                                                 .addPreferredGap(
-                                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                                                                .addComponent(ftfCnpj,
+                                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                                                                .addComponent(cbConsumidorFinal,
                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                                147,
+                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                                                .addGap(4, 4, 4)
-                                                                                                                .addComponent(btnPCnpj)
-                                                                                                                .addGap(18, 18, 18)
-                                                                                                                .addGroup(pInfosLayout
-                                                                                                                                .createParallelGroup(
-                                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING,
-                                                                                                                                                false)
-                                                                                                                                .addGroup(pInfosLayout
-                                                                                                                                                .createSequentialGroup()
-                                                                                                                                                .addComponent(lbInscricaoEstadual)
-                                                                                                                                                .addPreferredGap(
-                                                                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                                                                                .addComponent(ftfInscricaoEstadual,
-                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                                105,
-                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                                                                                .addPreferredGap(
-                                                                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                                                                                                .addComponent(cboxIsento))
-                                                                                                                                .addGroup(pInfosLayout
-                                                                                                                                                .createSequentialGroup()
-                                                                                                                                                .addComponent(lbInscricaoMunicipal)
-                                                                                                                                                .addPreferredGap(
-                                                                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                                                                                .addComponent(tfInscricaoMunicipal)))))
-                                                                                .addGroup(pInfosLayout
-                                                                                                .createSequentialGroup()
-                                                                                                .addComponent(lbFundacao)
-                                                                                                .addPreferredGap(
-                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                                .addComponent(ftfFund,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                103,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                                .addPreferredGap(
-                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                                                .addComponent(lbConsumidorFinal)
-                                                                                                .addPreferredGap(
-                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                                .addComponent(cbConsumidorFinal,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                                .addGap(11, 11, 11)
-                                                                                                .addComponent(lbCapitalSocial)
-                                                                                                .addPreferredGap(
-                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                                .addComponent(tfCapitalSocial))))
-                                                .addGroup(pInfosLayout.createSequentialGroup().addGap(39, 39, 39)
-                                                                .addGroup(pInfosLayout.createParallelGroup(
-                                                                                javax.swing.GroupLayout.Alignment.LEADING)
-                                                                                .addGroup(pInfosLayout
-                                                                                                .createSequentialGroup()
-                                                                                                .addComponent(lbContribuinte)
-                                                                                                .addPreferredGap(
-                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                                                .addComponent(tfContribuinte,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                139,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                                .addGroup(pInfosLayout
-                                                                                                .createSequentialGroup()
-                                                                                                .addComponent(lbNomeFantasia)
-                                                                                                .addPreferredGap(
-                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                                                .addComponent(tfNomeFantasia,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                417,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                                                                                                .addGap(9, 9, 9)))))
                                                 .addGap(42, 42, 42)));
                 pInfosLayout.setVerticalGroup(pInfosLayout
                                 .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -385,30 +361,15 @@ public class VCadastroCliente extends javax.swing.JFrame {
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(lbInscricaoMunicipal)
-                                                                .addComponent(tfInscricaoMunicipal,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(pInfosLayout.createParallelGroup(
-                                                                javax.swing.GroupLayout.Alignment.BASELINE)
-                                                                .addComponent(lbFundacao)
-                                                                .addComponent(lbConsumidorFinal)
-                                                                .addComponent(lbCapitalSocial)
-                                                                .addComponent(tfCapitalSocial,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(cbConsumidorFinal,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(ftfFund,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addContainerGap(17, Short.MAX_VALUE)));
+                                                                .addGroup(pInfosLayout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                                .addComponent(lbConsumidorFinal)
+                                                                                .addComponent(cbConsumidorFinal,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                Short.MAX_VALUE)));
 
                 pEndereco.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço",
                                 javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
@@ -429,13 +390,6 @@ public class VCadastroCliente extends javax.swing.JFrame {
                 lbPais.setText("País");
 
                 lbEstado.setText("Estado");
-
-                btnPCep.setText("P");
-                btnPCep.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                btnPCepActionPerformed(evt);
-                        }
-                });
 
                 cbEstado.addItemListener(new java.awt.event.ItemListener() {
                         public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -458,10 +412,7 @@ public class VCadastroCliente extends javax.swing.JFrame {
                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                                 105,
                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                .addPreferredGap(
-                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(btnPCep)
-                                                                                .addGap(106, 106, 106)
+                                                                                .addGap(151, 151, 151)
                                                                                 .addComponent(lbEstado)
                                                                                 .addPreferredGap(
                                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -532,8 +483,7 @@ public class VCadastroCliente extends javax.swing.JFrame {
                                 .addGroup(pEnderecoLayout.createSequentialGroup().addContainerGap()
                                                 .addGroup(pEnderecoLayout.createParallelGroup(
                                                                 javax.swing.GroupLayout.Alignment.BASELINE)
-                                                                .addComponent(lbCep).addComponent(btnPCep)
-                                                                .addComponent(lbEstado)
+                                                                .addComponent(lbCep).addComponent(lbEstado)
                                                                 .addComponent(cbEstado,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
@@ -684,7 +634,7 @@ public class VCadastroCliente extends javax.swing.JFrame {
                                                 .addComponent(pInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE)));
+                                                .addGap(0, 0, 0)));
 
                 tpCabecalho.addTab("Geral", pGeral);
 
@@ -695,7 +645,7 @@ public class VCadastroCliente extends javax.swing.JFrame {
                                                 .addGap(0, 596, Short.MAX_VALUE));
                 pComercialLayout.setVerticalGroup(
                                 pComercialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 538, Short.MAX_VALUE));
+                                                .addGap(0, 498, Short.MAX_VALUE));
 
                 tpCabecalho.addTab("Comercial", pComercial);
 
@@ -706,7 +656,7 @@ public class VCadastroCliente extends javax.swing.JFrame {
                                                 596, Short.MAX_VALUE));
                 pEstoqueLayout.setVerticalGroup(
                                 pEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0,
-                                                538, Short.MAX_VALUE));
+                                                498, Short.MAX_VALUE));
 
                 tpCabecalho.addTab("Estoque", pEstoque);
 
@@ -717,147 +667,131 @@ public class VCadastroCliente extends javax.swing.JFrame {
                                                 javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(tpCabecalho));
                 layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup().addComponent(tpCabecalho).addGap(0, 0, 0)
-                                                .addComponent(pRodape, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                .addGroup(layout.createSequentialGroup()
+                                                .addComponent(tpCabecalho, javax.swing.GroupLayout.DEFAULT_SIZE, 526,
+                                                                Short.MAX_VALUE)
+                                                .addGap(0, 0, 0).addComponent(pRodape,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)));
 
                 pack();
         }// </editor-fold>//GEN-END:initComponents
 
-        private void btnPCepActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnPCepActionPerformed
-                if (ftfCep.getText() == null || ftfCep.getText().trim().equals("")) {
-                        JOptionPane.showMessageDialog(null, "Insira um CEP");
-                } else {
-                        clienteEnd = controller.completaCep(ftfCep.getText());
-                        endUsado = true;
-                        tfBairro.setText(clienteEnd.getBairro());
-                        tfRua.setText(clienteEnd.getLogradouro());
-                }
-        }// GEN-LAST:event_btnPCepActionPerformed
-
-        private void cbEstadoItemStateChanged(java.awt.event.ItemEvent evt) {// GEN-FIRST:event_cbEstadoItemStateChanged
-                cbCidade.removeAllItems();
-                TEstado est = (TEstado) cbEstado.getSelectedItem();
-                List<TCidade> cid;
-                try {
-                        cid = new TCidade().getCidades(est.getId());
-                        for (TCidade i : cid) {
-                                cbCidade.addItem(i);
-                        }
-                } catch (SQLException ex) {
-                        Logger.getLogger(VCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-        }// GEN-LAST:event_cbEstadoItemStateChanged
-
-        private void preencheEndereco() {
-                if (!endUsado) {
-                        clienteEnd.setLogradouro(tfRua.getText());
-                        clienteEnd.setBairro(tfBairro.getText());
-                        clienteEnd.setNumero(tfNumero.getText());
-                        clienteEnd.setComplemento(tfComplemento.getText());
-                        TCidade cid = (TCidade) cbCidade.getSelectedItem();
-                        clienteEnd.setCidade(cid.getId());
-                        TEstado est = (TEstado) cbEstado.getSelectedItem();
-                        clienteEnd.setEstado(est.getId());
-                        clienteEnd.setPais(tfPais.getText());
-                } else {
-                        clienteEnd.setNumero(tfNumero.getText());
-                        clienteEnd.setComplemento(tfComplemento.getText());
-                        TCidade cid = (TCidade) cbCidade.getSelectedItem();
-                        clienteEnd.setCidade(cid.getId());
-                        TEstado est = (TEstado) cbEstado.getSelectedItem();
-                        clienteEnd.setEstado(est.getId());
-                        clienteEnd.setPais(tfPais.getText());
-                }
+    private void cbEstadoItemStateChanged(java.awt.event.ItemEvent evt) {// GEN-FIRST:event_cbEstadoItemStateChanged
+        cbCidade.removeAllItems();
+        TEstado est = (TEstado) cbEstado.getSelectedItem();
+        List<TCidade> cid;
+        try {
+            cid = new TCidade().getCidades(est.getId());
+            for (TCidade i : cid) {
+                cbCidade.addItem(i);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        private void carregaController() {
-                controller.setEndereco(clienteEnd);
-                controller.setFtfCnpj(ftfCnpj);
-                controller.setFtfInscricaoEstadual(ftfInscricaoEstadual);
-                controller.setTaObservacoes(taObservacoes);
-                controller.setTfCapitalSocial(tfCapitalSocial);
-                controller.setTfContribuinte(tfContribuinte);
-                controller.setTfEmail(tfEmail);
-                controller.setTfInscricaoMunicipal(tfInscricaoMunicipal);
-                controller.setTfNomeFantasia(tfNomeFantasia);
-                controller.setTfTelefone(tfTelefone);
-                controller.setTfRazaoSocial(tfRazaoSocial);
-                controller.setCbConsumidorFinal(cbConsumidorFinal);
+    }// GEN-LAST:event_cbEstadoItemStateChanged
 
+    private void preencheEndereco() {
+
+        clienteEnd.setCep(ftfCep.getText());
+        clienteEnd.setLogradouro(tfRua.getText());
+        clienteEnd.setBairro(tfBairro.getText());
+        clienteEnd.setNumero(tfNumero.getText());
+        clienteEnd.setComplemento(tfComplemento.getText());
+        TCidade cid = (TCidade) cbCidade.getSelectedItem();
+        clienteEnd.setCidade(cid.getId());
+        TEstado est = (TEstado) cbEstado.getSelectedItem();
+        clienteEnd.setEstado(est.getId());
+        clienteEnd.setPais(tfPais.getText());
+
+    }
+
+    private void carregaController() {
+        controller.setEndereco(clienteEnd);
+        controller.setFtfCnpj(ftfCnpj);
+        controller.setFtfInscricaoEstadual(ftfInscricaoEstadual);
+        controller.setTaObservacoes(taObservacoes);
+        controller.setTfContribuinte(tfContribuinte);
+        controller.setTfEmail(tfEmail);
+        controller.setTfNomeFantasia(tfNomeFantasia);
+        controller.setTfTelefone(tfTelefone);
+        controller.setTfRazaoSocial(tfRazaoSocial);
+        controller.setCbConsumidorFinal(cbConsumidorFinal);
+
+    }
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCadastrarActionPerformed
+        if (verificaCampos()) {
+            preencheEndereco();
+            carregaController();
+            controller.cadastraCliente();
+        } else {
+            JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios.");
         }
+    }// GEN-LAST:event_btnCadastrarActionPerformed
 
-        private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCadastrarActionPerformed
-                verificaCampos();
-                carregaController();
-                controller.cadastraCliente();
-        }// GEN-LAST:event_btnCadastrarActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCancelarActionPerformed
 
-        private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCancelarActionPerformed
-                dispose();
-        }// GEN-LAST:event_btnCancelarActionPerformed
+        dispose();
+    }// GEN-LAST:event_btnCancelarActionPerformed
 
-        private void cboxIsentoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cboxIsentoActionPerformed
-                if (cboxIsento.isSelected()) {
-                        ftfInscricaoEstadual.setEnabled(false);
-                } else {
-                        ftfInscricaoEstadual.setEnabled(true);
-                }
-        }// GEN-LAST:event_cboxIsentoActionPerformed
+    private void cboxIsentoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cboxIsentoActionPerformed
+        if (cboxIsento.isSelected()) {
+            ftfInscricaoEstadual.setEnabled(false);
+        } else {
+            ftfInscricaoEstadual.setEnabled(true);
+        }
+    }// GEN-LAST:event_cboxIsentoActionPerformed
 
-        private void ftfCnpjActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ftfCnpjActionPerformed
-                // TODO add your handling code here:
-        }// GEN-LAST:event_ftfCnpjActionPerformed
+    private void ftfCnpjActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ftfCnpjActionPerformed
+    }// GEN-LAST:event_ftfCnpjActionPerformed
 
-        /**
-         * @param args the command line arguments
-         */
-        public static void main(String args[]) {
-                /* Set the Nimbus look and feel */
-                // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
-                // (optional) ">
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+        // (optional) ">
                 /*
-                 * If Nimbus (introduced in Java SE 6) is not available, stay with the default
-                 * look and feel. For details see
-                 * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-                 */
-                try {
-                        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
-                                        .getInstalledLookAndFeels()) {
-                                if ("Windows".equals(info.getName())) {
-                                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                                        break;
-                                }
-                        }
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-                                | javax.swing.UnsupportedLookAndFeelException ex) {
-                        java.util.logging.Logger.getLogger(VCadastroCliente.class.getName())
-                                        .log(java.util.logging.Level.SEVERE, null, ex);
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+         * look and feel. For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
+                    .getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
                 }
-                // </editor-fold>
-                // </editor-fold>
-
-                // </editor-fold>
-                // </editor-fold>
-
-                /* Create and display the form */
-                java.awt.EventQueue.invokeLater(() -> {
-                        new VCadastroCliente().setVisible(true);
-                });
-
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(VCadastroCliente.class.getName())
+                    .log(java.util.logging.Level.SEVERE, null, ex);
         }
+                // </editor-fold>
+        // </editor-fold>
 
-        private CCadastroCliente controller;
-        private TCadastroJuridica novoUsuario;
-        private TUsuario user;
-        private TEndereco clienteEnd;
-        private boolean endUsado;
+        // </editor-fold>
+        // </editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> {
+            new VCadastroCliente().setVisible(true);
+        });
+
+    }
+
+    private CCadastroCliente controller;
+    private TCadastroJuridica novoUsuario;
+    private TUsuario user;
+    private TEndereco clienteEnd;
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JButton btnCadastrar;
         private javax.swing.JButton btnCancelar;
-        private javax.swing.JButton btnPCep;
         private javax.swing.JButton btnPCnpj;
         private javax.swing.JComboBox<Object> cbCidade;
         private javax.swing.JComboBox cbConsumidorFinal;
@@ -865,10 +799,8 @@ public class VCadastroCliente extends javax.swing.JFrame {
         private javax.swing.JCheckBox cboxIsento;
         private javax.swing.JFormattedTextField ftfCep;
         private javax.swing.JFormattedTextField ftfCnpj;
-        private javax.swing.JFormattedTextField ftfFund;
         private javax.swing.JFormattedTextField ftfInscricaoEstadual;
         private javax.swing.JLabel lbBairro;
-        private javax.swing.JLabel lbCapitalSocial;
         private javax.swing.JLabel lbCep;
         private javax.swing.JLabel lbCidade;
         private javax.swing.JLabel lbCnpj;
@@ -877,9 +809,7 @@ public class VCadastroCliente extends javax.swing.JFrame {
         private javax.swing.JLabel lbContribuinte;
         private javax.swing.JLabel lbEmail;
         private javax.swing.JLabel lbEstado;
-        private javax.swing.JLabel lbFundacao;
         private javax.swing.JLabel lbInscricaoEstadual;
-        private javax.swing.JLabel lbInscricaoMunicipal;
         private javax.swing.JLabel lbNomeFantasia;
         private javax.swing.JLabel lbNumero;
         private javax.swing.JLabel lbObservacoes;
@@ -897,11 +827,9 @@ public class VCadastroCliente extends javax.swing.JFrame {
         private javax.swing.JScrollPane spObservacoes;
         private javax.swing.JTextArea taObservacoes;
         private javax.swing.JTextField tfBairro;
-        private javax.swing.JTextField tfCapitalSocial;
         private javax.swing.JTextField tfComplemento;
         private javax.swing.JTextField tfContribuinte;
         private javax.swing.JTextField tfEmail;
-        private javax.swing.JTextField tfInscricaoMunicipal;
         private javax.swing.JTextField tfNomeFantasia;
         private javax.swing.JTextField tfNumero;
         private javax.swing.JTextField tfPais;

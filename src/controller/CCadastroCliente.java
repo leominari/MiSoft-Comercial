@@ -29,83 +29,39 @@ public class CCadastroCliente {
     private JTextField tfRazaoSocial;
     private JTextField tfTelefone;
     private JTextArea taObservacoes;
-    private JFormattedTextField ftfFund;
     private JFormattedTextField ftfInscricaoEstadual;
     private JFormattedTextField ftfCnpj;
     private JComboBox cbConsumidorFinal;
 
-    public TEndereco completaCep(String cep) {
-        TEndereco cliente = new TEndereco();
-        cliente.buscaCep(cep);
-        return cliente;
-    }
 
-    public void verificaCampos() {
-        if (tfNomeFantasia.getText().trim().equals("")) {
-            setTfNomeFantasia(null);
-        }
-        if (tfContribuinte.getText().trim().equals("")) {
-            setTfNomeFantasia(null);
-
-        }
-        if (tfEmail.getText().trim().equals("")) {
-            setTfNomeFantasia(null);
-
-        }
-        if (tfInscricaoMunicipal.getText().trim().equals("")) {
-            setTfNomeFantasia(null);
-
-        }
-        if (tfTelefone.getText().trim().equals("")) {
-            setTfNomeFantasia(null);
-
-        }
-        if (taObservacoes.getText().trim().equals("")) {
-            setTfNomeFantasia(null);
-
-        }
-        if (ftfFund.getText().trim().equals("")) {
-            setTfNomeFantasia(null);
-
-        }
-
-    }
-
-
-    public TCadastroJuridica completaCliente(){
+    public TCadastroJuridica completaCliente() {
         TCadastroJuridica colaborador = new TCadastroJuridica();
         colaborador.setRazaoSocial(tfRazaoSocial.getText());
         colaborador.setNomeFantasia(tfNomeFantasia.getText());
         colaborador.setCnpj(ftfCnpj.getText());
         colaborador.setInscricaoEstadual(ftfInscricaoEstadual.getText());
         colaborador.setContribuinte(tfContribuinte.getText());
-        colaborador.setInscricaoMunicipal(tfInscricaoMunicipal.getText());
-        colaborador.setFundacao(ftfFund.getText());
         colaborador.setTelefone(tfTelefone.getText());
         colaborador.setContribuinte(tfContribuinte.getText());
         colaborador.setConsumidorFinal(getCbConsumidorFinal().getSelectedItem().toString());
         colaborador.setIdEndereco(getEndereco().getId());
+        System.out.println(colaborador.getIdEndereco());
         colaborador.setEmail(tfEmail.getText());
         colaborador.setObservacoes(taObservacoes.getText());
         return colaborador;
     }
 
-
     public void cadastraCliente() {
-        verificaCampos();
         TCadastroJuridica colaborador = completaCliente();
-        
 
         try {
             getEndereco().setId(new MEndereco().novoEndereco(endereco));
             if (getEndereco().getId().equals("-1")) {
                 new Erro().erroCadastro();
             }
-            if(new MCadastroCliente().novoCadastro(colaborador)){
-            
-            }
+            if (new MCadastroCliente().novoCadastro(colaborador)) {
 
-            
+            }
         } catch (SQLException ex) {
             Logger.getLogger(CCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -235,20 +191,6 @@ public class CCadastroCliente {
      */
     public void setTaObservacoes(JTextArea taObservacoes) {
         this.taObservacoes = taObservacoes;
-    }
-
-    /**
-     * @return the ftfFund
-     */
-    public JFormattedTextField getFtfFund() {
-        return ftfFund;
-    }
-
-    /**
-     * @param ftfFund the ftfFund to set
-     */
-    public void setFtfFund(JFormattedTextField ftfFund) {
-        this.ftfFund = ftfFund;
     }
 
     /**

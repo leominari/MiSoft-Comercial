@@ -13,7 +13,6 @@ public class TCadastro {
 
     private String inscricaoEstadual;
     private String tipoContribuinte;
-    private String inscricaoMunicipal;
     private String consumidorFinal;
     private TEndereco endereco;
     private String observacoes;
@@ -48,19 +47,7 @@ public class TCadastro {
         this.tipoContribuinte = tipoContribuinte;
     }
 
-    /**
-     * @return the inscricaoMunicipal
-     */
-    public String getInscricaoMunicipal() {
-        return inscricaoMunicipal;
-    }
 
-    /**
-     * @param inscricaoMunicipal the inscricaoMunicipal to set
-     */
-    public void setInscricaoMunicipal(String inscricaoMunicipal) {
-        this.inscricaoMunicipal = inscricaoMunicipal;
-    }
 
     /**
      * @return the consumidorFinal

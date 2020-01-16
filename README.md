@@ -22,6 +22,12 @@
  - [ ] Tela Cadastro Colaborador
  - [ ] Cadastro de Conta Bancaria
  - [ ] Programação de Contas a Pagar
+ - [ ] Tela de Cadastro de Produto
+ - [ ] Cadastro de Produto
+ - [ ] Tela de Cadastro de Pedido
+ - [ ] Cadastro de Pedido
 
 
 
+Bugs Conhecidos
+ - [ ] Erro ao cadastrar cliente, endereço nulo

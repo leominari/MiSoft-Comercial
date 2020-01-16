@@ -22,21 +22,20 @@ public class MEndereco {
 
     public String novoEndereco(TEndereco endereco) throws SQLException {
         ResultSet rs;
+
         String query = "INSERT INTO `endereco`(`cep`, `estado`, `cidade`, `rua`, `bairro`, `pais`, `numero`, `complemento`) VALUES ('"
-                + endereco.getCep()
-                + "'," + endereco.getEstado()
-                + ", " + endereco.getCidade()
-                + ", '" + endereco.getLogradouro()
-                + "','" + endereco.getBairro()
-                + "','" + endereco.getPais()
-                + "','" + endereco.getNumero()
-                + "','" + endereco.getComplemento()
-                + "'); ";
+                + endereco.getCep() + "'," + endereco.getEstado() + ", " + endereco.getCidade() + ", '"
+                + endereco.getLogradouro() + "','" + endereco.getBairro() + "','" + endereco.getPais() + "','"
+                + endereco.getNumero() + "','" + endereco.getComplemento() + "'); ";
         ConexaoMysql banco = new ConexaoMysql();
+        System.out.println(query);
         if (banco.upQuery(query)) {
             query = "SELECT MAX(id) AS id FROM teste;";
             rs = banco.exQuery(query);
-            return rs.getString("id");
+            if (rs.next()) {
+                return rs.getString("id");
+            }
+
         }
         return "-1";
     }
@@ -47,10 +46,7 @@ public class MEndereco {
         ConexaoMysql banco = new ConexaoMysql();
         ResultSet rs = banco.exQuery(query);
         while (rs.next()) {
-            estados.add(new TEstado(rs.getString("id"),
-                    rs.getString("nome"),
-                    rs.getString("uf"))
-            );
+            estados.add(new TEstado(rs.getString("id"), rs.getString("nome"), rs.getString("uf")));
         }
         return estados;
     }
@@ -61,9 +57,7 @@ public class MEndereco {
         ConexaoMysql banco = new ConexaoMysql();
         ResultSet rs = banco.exQuery(query);
         while (rs.next()) {
-            cidades.add(new TCidade(rs.getString("id"),
-                    rs.getString("nome")
-            ));
+            cidades.add(new TCidade(rs.getString("id"), rs.getString("nome")));
         }
         return cidades;
     }

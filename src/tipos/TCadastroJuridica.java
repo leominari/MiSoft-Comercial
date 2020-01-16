@@ -9,17 +9,13 @@ package tipos;
  *
  * @author leo_m
  */
-public class TCadastroJuridica extends TCadastro{
+public class TCadastroJuridica extends TCadastro {
     private String razaoSocial;
     private String nomeFantasia;
     private String cnpj;
-    private String fundacao;
     private String capitalSocial;
     private String idEndereco;
     private String contribuinte;
-
-
-
 
     /**
      * @return the razaoSocial
@@ -61,20 +57,6 @@ public class TCadastroJuridica extends TCadastro{
      */
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
-    }
-
-    /**
-     * @return the fundacao
-     */
-    public String getFundacao() {
-        return fundacao;
-    }
-
-    /**
-     * @param fundacao the fundacao to set
-     */
-    public void setFundacao(String fundacao) {
-        this.fundacao = fundacao;
     }
 
     /**
