@@ -8,12 +8,8 @@ package model;
 import api.ConexaoMysql;
 
 import tipos.TCadastroJuridica;
-import tipos.TCidade;
-import tipos.TEstado;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -36,9 +32,15 @@ public class MCadastroCliente {
 
     public boolean verificaCadastroExiste(String cnpj) throws SQLException {
         String query = "SELECT documento FROM colaborador WHERE documento='" + cnpj + "';";
+        System.out.println(query);
         ConexaoMysql banco = new ConexaoMysql();
         ResultSet rs = banco.exQuery(query);
-        return rs.wasNull();
+        if (rs.next()) {
+            return false;
+        } else {
+            return true;
+        }
+
     }
 
 }

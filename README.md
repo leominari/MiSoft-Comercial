@@ -9,13 +9,15 @@
 | v0.28  | `Conexão com o Banco de Dados`         |
 | v0.30  | `Tela Cadastro P. Jurídica Finalizada` |
 | v0.35  | `Biblioteca adicionada ao projeto`     |
+| v0.40  | `Cadastro Pessoa Jurídica Finalizado`  |
 
+ - [X] Conexão com o Banco de Dados
  - [X] Tela Login
  - [X] Tela Cadastro Cliente P. Jurídica
- - [X] Conexão com o Banco de Dados
- - [ ] Tela Cadastro Cliente P. Fisíca
  - [X] Campos Formatados
- - [ ] Tela Cadastro Produto
+ - [ ] Tela Cadastro Cliente P. Fisíca
+ - [ ] Campos Formatados
+ - [X] Tela Cadastro Produto
  - [ ] Campos Formatados
  - [ ] Tela Cadastro Pedido
  - [ ] Campos Formatados
@@ -27,7 +29,3 @@
  - [ ] Tela de Cadastro de Pedido
  - [ ] Cadastro de Pedido
 
-
-
-Bugs Conhecidos
- - [ ] Erro ao cadastrar cliente, endereço nulo

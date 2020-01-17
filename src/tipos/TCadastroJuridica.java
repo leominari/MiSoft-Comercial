@@ -85,4 +85,9 @@ public class TCadastroJuridica extends TCadastro {
     public void setContribuinte(String contribuinte) {
         this.contribuinte = contribuinte;
     }
+
+    public void toStr() {
+        System.out.println(getCnpj());
+    
+    }
 }

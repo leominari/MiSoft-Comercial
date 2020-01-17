@@ -50,6 +50,7 @@ public class CCadastroCliente {
 
     public void cadastraCliente() {
         TCadastroJuridica colaborador = completaCliente();
+        colaborador.toStr();
         try {
             if (new MCadastroCliente().verificaCadastroExiste(colaborador.getCnpj())) {
                 if (new MEndereco().novoEndereco(endereco)) {
