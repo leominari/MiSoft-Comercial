@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import view.VCadastroCategoria;
 import view.VCadastroClienteJuridica;
+import view.VCadastroPedido;
 import view.VCadastroProduto;
 import view.VMenu;
 
@@ -203,6 +204,44 @@ public class Janela {
     }
     
     public void btnBarra(VMenu vm) {
+        vm.setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
+        vm.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                vm.dispose();
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+            }
+        });
+
+    }
+    
+        public void btnBarra(VCadastroPedido vm) {
         vm.setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
         vm.addWindowListener(new WindowListener() {
             @Override

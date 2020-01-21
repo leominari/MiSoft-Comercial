@@ -7,6 +7,7 @@ package controller;
 
 import api.Mensagem;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
@@ -15,7 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import model.MCliente;
 import model.MEndereco;
-import tipos.TCadastroJuridica;
+import tipos.TPessoaJuridica;
 import tipos.TEndereco;
 
 public class CCliente {
@@ -33,8 +34,8 @@ public class CCliente {
     private JFormattedTextField ftfCnpj;
     private JComboBox cbConsumidorFinal;
 
-    public TCadastroJuridica completaCliente() {
-        TCadastroJuridica colaborador = new TCadastroJuridica();
+    public TPessoaJuridica completaCliente() {
+        TPessoaJuridica colaborador = new TPessoaJuridica();
         colaborador.setRazaoSocial(tfRazaoSocial.getText());
         colaborador.setNomeFantasia(tfNomeFantasia.getText());
         colaborador.setCnpj(ftfCnpj.getText());
@@ -49,7 +50,7 @@ public class CCliente {
     }
 
     public void cadastraCliente() {
-        TCadastroJuridica colaborador = completaCliente();
+        TPessoaJuridica colaborador = completaCliente();
         colaborador.toStr();
         try {
             if (new MCliente().verificaCadastroExiste(colaborador.getCnpj())) {
@@ -235,5 +236,6 @@ public class CCliente {
     public void setCbConsumidorFinal(JComboBox cbConsumidorFinal) {
         this.cbConsumidorFinal = cbConsumidorFinal;
     }
+
 
 }

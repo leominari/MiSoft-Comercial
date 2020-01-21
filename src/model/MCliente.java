@@ -7,9 +7,12 @@ package model;
 
 import api.ConexaoMysql;
 
-import tipos.TCadastroJuridica;
+import tipos.TPessoaJuridica;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import tipos.TCategoria;
 
 /**
  *
@@ -17,7 +20,7 @@ import java.sql.SQLException;
  */
 public class MCliente {
 
-    public boolean novoCadastro(TCadastroJuridica colaborador) throws SQLException {
+    public boolean novoCadastro(TPessoaJuridica colaborador) throws SQLException {
         ConexaoMysql banco = new ConexaoMysql();
         String query = "INSERT INTO `colaborador`(`nome`, `razaosocial`, `documento`, `inscricaoestadual`, `telefone`, `email`, `observacoes`, `contribuinte`, `consumidorfinal`, `endereco`) VALUES ('"
                 + colaborador.getNomeFantasia() + "','" + colaborador.getRazaoSocial() + "','" + colaborador.getCnpj()
@@ -39,6 +42,20 @@ public class MCliente {
             return true;
         }
 
+    }
+
+    public List<TPessoaJuridica> listaClientes() throws SQLException {
+        List<TPessoaJuridica> clientes = new ArrayList<>();
+        String query = "SELECT id, razaosocial, documento FROM colaborador;";
+        ConexaoMysql banco = new ConexaoMysql();
+        ResultSet rs = banco.exQuery(query);
+        while (rs.next()) {
+            clientes.add(new TPessoaJuridica(
+                    rs.getString("id"),
+                    rs.getString("razaosocial"),
+                    rs.getString("documento")));
+        }
+        return clientes;
     }
 
 }

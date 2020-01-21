@@ -69,6 +69,11 @@ public class VMenu extends javax.swing.JFrame {
         });
 
         btnPedido.setText("Cadastro Pedido");
+        btnPedido.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPedidoMouseClicked(evt);
+            }
+        });
 
         lbMenu.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         lbMenu.setText("Menu Temporario");
@@ -138,6 +143,12 @@ public class VMenu extends javax.swing.JFrame {
         cp.setVisible(true);
         new Janela().btnBarra(cp);
     }//GEN-LAST:event_btnProdutoMouseClicked
+
+    private void btnPedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPedidoMouseClicked
+        VCadastroPedido cp = new VCadastroPedido();
+        cp.setVisible(true);
+        new Janela().btnBarra(cp);
+    }//GEN-LAST:event_btnPedidoMouseClicked
 
     /**
      * @param args the command line arguments

@@ -10,18 +10,14 @@ import tipos.TEndereco;
 import tipos.TEstado;
 import javax.swing.JOptionPane;
 import controller.CCliente;
-import java.awt.Color;
 import tipos.TCidade;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
-import tipos.TCadastroJuridica;
+import tipos.TPessoaJuridica;
 import tipos.TUsuario;
 
 /**
@@ -98,7 +94,7 @@ public class VCadastroClienteJuridica extends javax.swing.JFrame {
         clienteEnd = new TEndereco();
         controller = new CCliente();
         formataCampos();
-//        debugDados();
+        debugDados();
     }
 
     /**
@@ -628,7 +624,7 @@ public class VCadastroClienteJuridica extends javax.swing.JFrame {
     }
 
     private CCliente controller;
-    private TCadastroJuridica novoUsuario;
+    private TPessoaJuridica novoUsuario;
     private TUsuario user;
     private TEndereco clienteEnd;
     // Variables declaration - do not modify//GEN-BEGIN:variables

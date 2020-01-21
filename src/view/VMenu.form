@@ -107,6 +107,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Cadastro Pedido"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnPedidoMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbMenu">
           <Properties>
