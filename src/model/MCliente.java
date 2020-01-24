@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import tipos.TCategoria;
 
 /**
  *
@@ -46,7 +45,7 @@ public class MCliente {
 
     public List<TPessoaJuridica> listaClientes() throws SQLException {
         List<TPessoaJuridica> clientes = new ArrayList<>();
-        String query = "SELECT id, razaosocial, documento FROM colaborador;";
+        String query = "SELECT id, razaosocial, documento FROM colaborador ORDER BY razaosocial;";
         ConexaoMysql banco = new ConexaoMysql();
         ResultSet rs = banco.exQuery(query);
         while (rs.next()) {
