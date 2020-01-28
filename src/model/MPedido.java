@@ -45,6 +45,8 @@ public class MPedido extends AbstractTableModel {
                 return pedidos.get(rowIndex).getProduto().getPreco();
             case 3:
                 return pedidos.get(rowIndex).getValor();
+            case -1:
+                return pedidos.get(rowIndex).getProduto();
         }
         return null;
     }

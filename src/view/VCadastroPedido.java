@@ -402,11 +402,17 @@ public class VCadastroPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        TItemPedido pedido = new TItemPedido();
         if (jtProdutos.getSelectedRow() != -1) {
-            model.setValueAt(cbProduto, jtProdutos.getSelectedRow(), 0);
-            model.setValueAt(cbProduto, jtProdutos.getSelectedRow(), 1);
-            model.setValueAt(cbProduto, jtProdutos.getSelectedRow(), 2);
-            model.setValueAt(cbProduto, jtProdutos.getSelectedRow(), 3);
+            pedido.setProduto((TProduto) jtProdutos.getValueAt(jtProdutos.getSelectedRow(), -1));
+            pedido.setQuantidade((int) jtProdutos.getValueAt(jtProdutos.getSelectedRow(), 1));
+            pedido.setValor((double) jtProdutos.getValueAt(jtProdutos.getSelectedRow(), 3));
+            VAlterarPedido ap = new VAlterarPedido(pedido);
+//            model.setValueAt(cbProduto, jtProdutos.getSelectedRow(), 0);
+//            model.setValueAt(cbProduto, jtProdutos.getSelectedRow(), 1);
+//            model.setValueAt(cbProduto, jtProdutos.getSelectedRow(), 2);
+//            model.setValueAt(cbProduto, jtProdutos.getSelectedRow(), 3);
+//            
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
