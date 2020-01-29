@@ -6,6 +6,7 @@
 package view;
 
 import java.util.List;
+import javax.swing.JTable;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import tipos.TItemPedido;
 import tipos.TProduto;
@@ -32,9 +33,10 @@ public class VAlterarPedido extends javax.swing.JFrame {
     /**
      * Creates new form VAlterarPedido
      */
-    public VAlterarPedido(TItemPedido pedido) {
+    public VAlterarPedido(TItemPedido pedido, JTable produtos) {
         initComponents();
         inicializaComponentes();
+        this.produtos = produtos;
         oldPedido = pedido;
         cbProduto.setSelectedItem(pedido.getProduto());
         tfQuantidade.setText("" + pedido.getQuantidade());
@@ -173,10 +175,10 @@ public class VAlterarPedido extends javax.swing.JFrame {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         newPedido.setProduto((TProduto) cbProduto.getSelectedItem());
-        newPedido.setQuantidade(tfQuantidade.getText());
-        newPedido.setValor(tfValor);
-        if (oldPedido.getProduto().getNome().equals()) {
-            newPedido.getProduto().setPreco();
+        newPedido.setQuantidade(Integer.parseInt(tfQuantidade.getText()));
+        newPedido.setValor(Double.parseDouble(tfValor.getText()));
+        if (!(oldPedido.getProduto().getNome().equals(newPedido.getProduto().getNome()))) {
+            
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
@@ -214,6 +216,7 @@ public class VAlterarPedido extends javax.swing.JFrame {
             }
         });
     }
+    private JTable produtos;
     private TItemPedido oldPedido;
     private TItemPedido newPedido;
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,12 +5,9 @@
  */
 package view;
 
-import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import model.MPedido;
-import model.MProduto;
 import tipos.TPessoaJuridica;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import tipos.TItemPedido;
@@ -407,7 +404,7 @@ public class VCadastroPedido extends javax.swing.JFrame {
             pedido.setProduto((TProduto) jtProdutos.getValueAt(jtProdutos.getSelectedRow(), -1));
             pedido.setQuantidade((int) jtProdutos.getValueAt(jtProdutos.getSelectedRow(), 1));
             pedido.setValor((double) jtProdutos.getValueAt(jtProdutos.getSelectedRow(), 3));
-            VAlterarPedido ap = new VAlterarPedido(pedido);
+//            VAlterarPedido ap = new VAlterarPedido(pedido);
 //            model.setValueAt(cbProduto, jtProdutos.getSelectedRow(), 0);
 //            model.setValueAt(cbProduto, jtProdutos.getSelectedRow(), 1);
 //            model.setValueAt(cbProduto, jtProdutos.getSelectedRow(), 2);
